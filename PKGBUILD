@@ -41,9 +41,9 @@ build() {
   export CGO_CFLAGS="${CFLAGS}"
   export CGO_CPPFLAGS="${CPPFLAGS}"
   export CGO_CXXFLAGS="${CXXFLAGS}"
-  export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external -mod=readonly -modcacherw"
+  export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
 
-  go build -o build/ cmd/$pkgname.go
+  go build -ldflags "-linkmode=external -X main.version=$pkgver-$pkgrel-arch" -o build/ cmd/$pkgname.go
 }
 
 check() {
